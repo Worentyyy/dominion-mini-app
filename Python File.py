@@ -49,7 +49,7 @@ from aiogram.types import (
 # CONFIG
 # ============================================================
 
-BOT_TOKEN = "8725849526:AAFqEuBTnSj_QF_aBq4IKxjHiXo1oj2fjC0"
+BOT_TOKEN = "Bot_Token"
 OWNER_ID = 7952277527
 NEWS_CHANNEL_ID = "@dminionss"
 DB_FILE = "dominion.db"
