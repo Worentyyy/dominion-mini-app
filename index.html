@@ -2,12 +2,11 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#080b13">
-    <!-- Leave empty when the Mini App and API share one HTTPS origin. -->
-    <meta name="dominion-api-base" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080b13">
   <title>DOMINION</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
   <div class="ambient ambient-1"></div><div class="ambient ambient-2"></div><div class="grain"></div>
@@ -15,54 +14,52 @@
 
   <main class="app">
     <header class="topbar">
-      <button class="brand brand-button" data-action="home" aria-label="Главная"><div class="brand-mark">◆</div><div><div class="brand-name">DOMINION</div><div class="brand-sub">MINI APP</div></div></button>
+      <button class="brand brand-button" data-action="home"><div class="brand-mark">◆</div><div><div class="brand-name">DOMINION</div><div class="brand-sub">MINI APP</div></div></button>
       <div class="top-actions">
-        <div class="balance"><span class="crystal">✦</span><span id="crystalBalance">1 250</span><button class="plus" data-action="crystals">+</button></div>
-        <button class="avatar-mini" data-action="profile" aria-label="Профиль"><span id="miniAvatar">🧙</span></button>
+        <div class="balance"><span class="crystal">✦</span><span id="crystalBalance">—</span><button class="plus" data-action="crystals">+</button></div>
+        <button class="avatar-mini" data-action="profile"><span id="miniAvatar">🧙</span></button>
       </div>
     </header>
 
     <section id="home" class="screen active">
       <div class="hero hero-home">
         <div class="hero-runes">✦　◇　✧　◇　✦</div><div class="hero-orb"></div>
-        <div class="hero-character"><div class="character-ring"></div><div class="character-avatar" id="homeAvatar">🧙</div><div class="character-level">LVL 27</div></div>
-        <div class="hero-content"><span class="eyebrow">SEASON I</span><h1>Твой путь<br><span>начинается здесь</span></h1><p>Развивай героя, открывай награды и создавай свою историю в DOMINION.</p></div>
+        <div class="hero-character"><div class="character-ring"></div><div class="character-avatar" id="homeAvatar">🧙</div><div class="character-level" id="homeLevel">LVL —</div></div>
+        <div class="hero-content"><span class="eyebrow" id="homeSeason">SEASON I</span><h1>Твой путь<br><span>начинается здесь</span></h1><p>Развивай героя, открывай награды и создавай свою историю в DOMINION.</p></div>
       </div>
 
-      <button class="profile-preview card" data-action="profile"><div class="preview-avatar" id="previewAvatar">🧙</div><div class="preview-main"><b id="profileNameHome">Стёпа</b><small>Уровень 27 · Воин</small><div class="progress"><i style="width:72%"></i></div><span>7 420 / 10 000 XP</span></div><span class="arrow">›</span></button>
+      <button class="profile-preview card" data-action="profile"><div class="preview-avatar" id="previewAvatar">🧙</div><div class="preview-main"><b id="profileNameHome">Загрузка...</b><small id="profileSubHome">—</small><div class="progress"><i id="homeXpBar" style="width:0%"></i></div><span id="homeXpText">— / — XP</span></div><span class="arrow">›</span></button>
 
-      <button class="play-card" data-action="demoBattle"><div class="play-icon">⚔</div><div><b>ИГРАТЬ</b><small>Открыть демонстрацию боя</small></div><span>›</span></button>
+      <button class="play-card" data-action="demoBattle"><div class="play-icon">⚔</div><div><b>ИГРАТЬ</b><small>Демо боя</small></div><span>›</span></button>
 
-      <section class="pass-card card" data-action="pass"><div class="pass-art"><span>♛</span></div><div class="pass-info"><div class="label">BATTLE PASS</div><div class="muted">Сезон I · Apocalypse</div><div class="progress-row"><span>Уровень <b>37</b> / 100</span><span>37%</span></div><div class="progress"><i style="width:37%"></i></div></div><button class="outline-btn">ОТКРЫТЬ <span>›</span></button></section>
+      <section class="pass-card card" data-action="pass"><div class="pass-art"><span>♛</span></div><div class="pass-info"><div class="label">BATTLE PASS</div><div class="muted" id="bpSeason">Сезон I · Apocalypse</div><div class="progress-row"><span>Уровень <b id="bpLevelHome">—</b> / 100</span><span id="bpPercent">—%</span></div><div class="progress"><i id="bpBarHome" style="width:0%"></i></div></div><button class="outline-btn">ОТКРЫТЬ <span>›</span></button></section>
 
-      <div class="tiles"><button class="tile blue" data-action="crystals"><div class="tile-icon">✦</div><div><strong>Кристаллы</strong><small>Покупка за Stars</small></div><span class="arrow">›</span></button><button class="tile gold" data-action="privileges"><div class="tile-icon">♛</div><div><strong>Привилегии</strong><small>VIP · Корона · Божественная</small></div><span class="arrow">›</span></button></div>
+      <div class="tiles"><button class="tile blue" data-action="crystals"><div class="tile-icon">✦</div><div><strong>Кристаллы</strong><small id="crystalSub">—</small></div><span class="arrow">›</span></button><button class="tile gold" data-action="privileges"><div class="tile-icon">♛</div><div><strong>Привилегии</strong><small id="privSub">VIP · Корона · Божественная</small></div><span class="arrow">›</span></button></div>
       <section class="offer card"><div class="offer-tag">ВЫГОДНО</div><div><div class="label">НАБОР НОВИЧКА</div><p>500 ✦ · 500K DKR · 3 кейса</p></div><button class="buy-btn" data-buy="starter">★ 330</button></section>
     </section>
 
     <section id="profile" class="screen">
       <div class="section-head"><button class="back" data-action="home">‹</button><div><div class="eyebrow">CHARACTER</div><h2>Профиль</h2></div></div>
-      <div id="profileLoading" class="profile-loading card" aria-live="polite">Пробуждаем данные героя…</div>
-      <div id="profileContent" class="profile-content" hidden>
-        <div class="profile-hero card">
-          <button class="profile-avatar-wrap avatar-trigger" id="avatarTrigger" aria-label="Изменить аватар"><span class="profile-ring ring-outer"></span><span class="profile-ring ring-inner"></span><span class="profile-avatar" id="profileAvatar">🧙</span><span class="avatar-edit">✎</span><span class="online-dot"></span></button>
-          <div class="profile-title"><b id="profileName">—</b><span id="profileLevelRank">—</span><div class="xp-line"><div class="progress"><i id="profileXpProgress" style="width:0%"></i></div><small id="profileXpText">—</small></div></div>
-        </div>
-        <div class="profile-currency"><div class="currency-item card"><span>💰</span><small>DKR</small><b id="profileDcr">—</b></div><div class="currency-item card"><span>✦</span><small>КРИСТАЛЛЫ</small><b id="profileCrystals">—</b></div></div>
-        <div class="stats-grid"><div class="stat card"><span>🏆</span><small>PVP MMR</small><b id="profileMmr">—</b></div><div class="stat card"><span id="profilePvpRankIcon">⌁</span><small>PVP РАНГ</small><b id="profilePvpRank">—</b></div><div class="stat card"><span>⚔</span><small>ПОБЕДЫ / ПОРАЖЕНИЯ</small><b id="profileRecord">—</b></div><div class="stat card"><span>🔥</span><small>ТЕКУЩАЯ СЕРИЯ</small><b id="profileStreak">—</b></div></div>
-        <div class="profile-section card profile-summary"><div class="summary-row"><span>🎫</span><div><b>Battle Pass</b><small id="profileBattlePass">—</small></div><strong id="profileBattlePassPremium">—</strong></div><div class="summary-row"><span>♛</span><div><b>Привилегия</b><small id="profilePrivilege">—</small></div></div></div>
-        <div class="profile-section card"><div class="section-title"><b>Экипировка</b><small>Текущие предметы героя</small></div><div class="equipment"><div><span class="equipment-icon">⚔️</span><span>Оружие</span><b id="equipmentWeapon">—</b></div><div><span class="equipment-icon">🛡️</span><span>Броня</span><b id="equipmentArmor">—</b></div><div><span class="equipment-icon">🛡</span><span>Щит</span><b id="equipmentShield">—</b></div><div><span class="equipment-icon">✧</span><span>Способность</span><b id="equipmentAbility">—</b></div><div><span class="equipment-icon">🐾</span><span>Питомец</span><b id="equipmentPet">—</b></div></div></div>
+      <div class="profile-hero card"><div class="profile-avatar-wrap"><div class="profile-avatar" id="profileAvatar">🧙</div><span class="online-dot"></span></div><div class="profile-title"><b id="profileName">—</b><span id="profileRank">—</span><div class="xp-line"><div class="progress"><i id="xpBar" style="width:0%"></i></div><small id="xpText">— / — XP</small></div></div></div>
+      <div class="stats-grid">
+        <div class="stat card"><span>💰</span><small>DKR</small><b id="statDcr">—</b></div>
+        <div class="stat card"><span>✦</span><small>КРИСТАЛЛЫ</small><b id="statCrystals">—</b></div>
+        <div class="stat card"><span>🏆</span><small>PVP MMR</small><b id="statMmr">—</b><small id="statMmrRank" style="margin-top:2px"></small></div>
+        <div class="stat card"><span>⚔️</span><small>ПОБЕДЫ / ПОРАЖЕНИЯ</small><b id="statWl">— / —</b><small id="statStreak"></small></div>
       </div>
+      <div class="profile-section card"><div class="section-title"><b>Привилегия</b><small id="privUntil">—</small></div><div id="privBadge" class="priv-badge">Нет активной привилегии</div></div>
+      <div class="profile-section card"><div class="section-title"><b>Аватар</b><small>Выбери внешний вид героя</small></div><div class="avatars" id="avatarGrid"><button class="avatar-choice" data-avatar="🧙">🧙<small>Маг</small></button><button class="avatar-choice" data-avatar="⚔️">⚔️<small>Воин</small></button><button class="avatar-choice" data-avatar="🥷">🥷<small>Тень</small></button><button class="avatar-choice" data-avatar="🧛">🧛<small>Кровь</small></button><button class="avatar-choice" data-avatar="🐺">🐺<small>Охотник</small></button><button class="avatar-choice" data-avatar="👑">👑<small>Лорд</small></button><button class="avatar-choice" data-avatar="👹">👹<small>Демон</small></button><button class="avatar-choice" data-avatar="🪽">🪽<small>Небеса</small></button></div></div>
+      <div class="profile-section card"><div class="section-title"><b>Экипировка</b><small>Текущие предметы героя</small></div><div class="equipment" id="equipList"></div></div>
     </section>
 
-    <section id="battle" class="screen"><div class="section-head"><button class="back" data-action="home">‹</button><div><div class="eyebrow">DEMO COMBAT</div><h2>Бой</h2></div></div><div class="battle-card card"><div class="fighter"><div class="battle-avatar" id="battlePlayerAvatar">🧙</div><b>СТЁПА</b><small>LVL 27</small><div class="hp"><i id="playerHp" style="width:86%"></i></div><span>1 290 / 1 500 HP</span></div><div class="vs">VS</div><div class="fighter enemy"><div class="battle-avatar">👹</div><b>ХРАНИТЕЛЬ</b><small>БОСС · LVL 30</small><div class="hp"><i id="enemyHp" style="width:72%"></i></div><span id="enemyHpText">7 200 / 10 000 HP</span></div></div><div class="combat-log" id="combatLog">Бой готов. Нажми атаку, чтобы увидеть анимации.</div><div class="combat-actions"><button class="combat-btn" data-action="attack">⚔️ Атаковать</button><button class="combat-btn secondary" data-action="skill">✨ Способность</button></div></section>
+    <section id="battle" class="screen"><div class="section-head"><button class="back" data-action="home">‹</button><div><div class="eyebrow">DEMO COMBAT</div><h2>Бой</h2></div></div><div class="battle-card card"><div class="fighter"><div class="battle-avatar" id="battlePlayerAvatar">🧙</div><b id="battleName">ИГРОК</b><small id="battleLvl">LVL —</small><div class="hp"><i id="playerHp" style="width:86%"></i></div><span>1 500 / 1 500 HP</span></div><div class="vs">VS</div><div class="fighter enemy"><div class="battle-avatar">👹</div><b>ХРАНИТЕЛЬ</b><small>БОСС · LVL 30</small><div class="hp"><i id="enemyHp" style="width:72%"></i></div><span id="enemyHpText">7 200 / 10 000 HP</span></div></div><div class="combat-log" id="combatLog">Загрузка данных профиля...</div><div class="combat-actions"><button class="combat-btn" data-action="attack">⚔️ Атаковать</button><button class="combat-btn secondary" data-action="skill">✨ Способность</button></div></section>
 
-    <section id="pass" class="screen"><div class="section-head"><button class="back" data-action="home">‹</button><div><div class="eyebrow">СЕЗОН I</div><h2>Battle Pass</h2></div></div><div class="pass-header card"><div class="level-big">37</div><div><b>Уровень боевого пропуска</b><small>До следующей награды 63 уровня</small></div></div><div class="rewards"><div class="reward free claimed"><span>✦</span><b>100</b><small>БЕСПЛАТНО</small></div><div class="reward premium"><span>🎁</span><b>Кейс</b><small>PREMIUM</small></div><div class="reward free"><span>◈</span><b>25K</b><small>DKR</small></div><div class="reward premium"><span>♛</span><b>VIP</b><small>PREMIUM</small></div><div class="reward free"><span>✦</span><b>150</b><small>КРИСТАЛЛЫ</small></div><div class="reward premium rare"><span>⚔</span><b>МИФИК</b><small>PREMIUM</small></div></div><button class="wide-btn" data-buy="battlepass">КУПИТЬ PREMIUM · 799 ★</button></section>
-    <section id="crystals" class="screen"><div class="section-head"><button class="back" data-action="home">‹</button><div><div class="eyebrow">PREMIUM CURRENCY</div><h2>Кристаллы</h2></div></div><div class="balance-large"><span>✦</span><b id="crystalBalanceLarge">1 250</b><small>текущий баланс</small></div><div class="packs"><button class="pack" data-buy="crystals100"><b>100 ✦</b><span>70 ★</span></button><button class="pack featured" data-buy="crystals500"><em>ПОПУЛЯРНЫЙ</em><b>500 ✦</b><span>330 ★</span></button><button class="pack" data-buy="crystals1000"><b>1 000 ✦</b><span>670 ★</span></button><button class="pack" data-buy="crystals5000"><b>5 000 ✦</b><span>3 330 ★</span></button><button class="pack" data-buy="crystals10000"><b>10 000 ✦</b><span>6 660 ★</span></button></div></section>
-    <section id="privileges" class="screen"><div class="section-head"><button class="back" data-action="home">‹</button><div><div class="eyebrow">30 ДНЕЙ</div><h2>Привилегии</h2></div></div><p class="section-note">Уникальный статус, эксклюзивные награды и дополнительные возможности на 30 дней.</p><div class="privileges"><button class="privilege vip" data-buy="vip"><span class="priv-icon">V</span><div><b>VIP</b><small>Уникальный статус · бонусы</small></div><strong>100 ✦</strong></button><button class="privilege crown" data-buy="crown"><span class="priv-icon">♛</span><div><b>Корона</b><small>Эксклюзивные награды · больше бонусов</small></div><strong>150 ✦</strong></button><button class="privilege divine" data-buy="divine"><span class="priv-icon">✧</span><div><b>Божественная</b><small>Максимальные бонусы · особый статус</small></div><strong>300 ✦</strong></button></div></section>
+    <section id="pass" class="screen"><div class="section-head"><button class="back" data-action="home">‹</button><div><div class="eyebrow">СЕЗОН I</div><h2>Battle Pass</h2></div></div><div class="pass-header card"><div class="level-big" id="bpLevel">—</div><div><b>Уровень боевого пропуска</b><small id="bpHint">—</small></div></div><div class="rewards" id="bpRewards"></div><button class="wide-btn" data-buy="battlepass">КУПИТЬ PREMIUM · 799 ★</button></section>
+    <section id="crystals" class="screen"><div class="section-head"><button class="back" data-action="home">‹</button><div><div class="eyebrow">PREMIUM CURRENCY</div><h2>Кристаллы</h2></div></div><div class="balance-large"><span>✦</span><b id="crystalBalanceLarge">—</b><small>текущий баланс</small></div><div class="packs" id="crystalPacks"></div></section>
+    <section id="privileges" class="screen"><div class="section-head"><button class="back" data-action="home">‹</button><div><div class="eyebrow">30 ДНЕЙ</div><h2>Привилегии</h2></div></div><p class="section-note">Уникальный статус, эксклюзивные награды и дополнительные возможности на 30 дней.</p><div class="privileges" id="privilegesList"></div></section>
 
     <nav class="bottom-nav"><button class="nav active" data-action="home"><span>⌂</span>Главная</button><button class="nav" data-action="pass"><span>♜</span>Battle Pass</button><button class="nav" data-action="crystals"><span>✦</span>Кристаллы</button><button class="nav" data-action="privileges"><span>♛</span>Привилегии</button></nav>
   </main>
-  <div class="avatar-modal" id="avatarModal" aria-hidden="true"><div class="modal-backdrop" data-action="closeAvatarModal"></div><section class="avatar-sheet card" role="dialog" aria-modal="true" aria-labelledby="avatarModalTitle"><div class="sheet-grip"></div><div class="section-title"><div><b id="avatarModalTitle">Облик героя</b><small>Выбор сохраняется в профиле</small></div><button class="modal-close" data-action="closeAvatarModal" aria-label="Закрыть">×</button></div><div class="avatars" id="avatarGrid"><button class="avatar-choice" data-avatar-key="mage">🧙<small>Маг</small></button><button class="avatar-choice" data-avatar-key="warrior">⚔️<small>Воин</small></button><button class="avatar-choice" data-avatar-key="shadow">🥷<small>Тень</small></button><button class="avatar-choice" data-avatar-key="blood">🧛<small>Кровь</small></button><button class="avatar-choice" data-avatar-key="hunter">🐺<small>Охотник</small></button><button class="avatar-choice" data-avatar-key="lord">👑<small>Лорд</small></button><button class="avatar-choice" data-avatar-key="demon">👹<small>Демон</small></button><button class="avatar-choice" data-avatar-key="celestial">🪽<small>Небеса</small></button></div></section></div>
   <div id="toast" class="toast"></div><script src="app.js"></script>
 </body>
 </html>
